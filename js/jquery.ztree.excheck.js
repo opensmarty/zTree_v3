@@ -1,5 +1,5 @@
 /*
- * JQuery zTree excheck v3.5.37
+ * JQuery zTree excheck v3.5.40
  * http://treejs.cn/
  *
  * Copyright (c) 2010 Hunter.z
@@ -8,7 +8,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  *
  * email: hunter.z@263.net
- * Date: 2018-08-21
+ * Date: 2019-01-18
  */
 (function ($) {
   //default consts of excheck
@@ -133,7 +133,6 @@
     _initNode = function (setting, level, n, parentNode, isFirstNode, isLastNode, openFlag) {
       if (!n) return;
       var checked = data.nodeChecked(setting, n);
-      checked = data.nodeChecked(setting, n, checked);
       n.checkedOld = checked;
       if (typeof n.nocheck == "string") n.nocheck = tools.eqs(n.nocheck, "true");
       n.nocheck = !!n.nocheck || (setting.check.nocheckInherit && parentNode && !!parentNode.nocheck);
@@ -605,6 +604,10 @@
       }
       newChecked = !!newChecked;
       node[key] = newChecked;
+    } else if (typeof node[key] == "string"){
+      node[key] = tools.eqs(node[key], "true");
+    } else {
+      node[key] = !!node[key];
     }
     return node[key];
   };

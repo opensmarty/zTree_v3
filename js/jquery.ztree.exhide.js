@@ -1,5 +1,5 @@
 /*
- * JQuery zTree exHideNodes v3.5.37
+ * JQuery zTree exHideNodes v3.5.40
  * http://treejs.cn/
  *
  * Copyright (c) 2010 Hunter.z
@@ -8,7 +8,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  *
  * email: hunter.z@263.net
- * Date: 2018-08-21
+ * Date: 2019-01-18
  */
 (function ($) {
   var _setting = {
@@ -300,10 +300,14 @@
     var key = setting.data.key.isHidden;
     if (typeof newIsHidden !== 'undefined') {
       if (typeof newIsHidden === "string") {
-        newIsHidden = tools.eqs(checked, "true");
+        newIsHidden = tools.eqs(newIsHidden, "true");
       }
       newIsHidden = !!newIsHidden;
       node[key] = newIsHidden;
+    } else if (typeof node[key] == "string"){
+      node[key] = tools.eqs(node[key], "true");
+    } else {
+      node[key] = !!node[key];
     }
     return node[key];
   };
